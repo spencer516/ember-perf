@@ -39,7 +39,7 @@ export default Base.extend(Evented, {
    * @private
    */
   _measureTransition(transitionInfo) {
-    if (transitionInfo.promise._emberPerfTransitionId) {
+    if (transitionInfo.promise._emberPerfTransitionId || Ember.get(transitionInfo.promise, 'queryParamsOnly')) {
       return;
     }
     transitionInfo.promise._emberPerfTransitionId = transitionCounter++;

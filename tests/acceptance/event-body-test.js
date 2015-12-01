@@ -134,3 +134,21 @@ test('Initial measureRender', function(assert) {
     validateEvent(assert, testStartTime, data, 'render');
   });
 });
+
+test('support query params', function(assert) {
+  let datas = [];
+  let testStartTime = performanceNow();
+
+  application.perfService.on('transitionComplete', data => {
+    datas.push(data);
+  });
+
+  visit('/companies');
+  click('button.useless-button');
+
+  andThen(function() {
+    assert.equal(datas.length, 1, 'query param only transitions are ignored');
+    let [ data ] = datas;
+    validateEvent(assert, testStartTime, data, 'render');
+  });
+});

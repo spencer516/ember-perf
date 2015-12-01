@@ -1,3 +1,12 @@
 {{view 'items-list' class='companies-list' content=content itemClass='company' itemRoute='company'}}
 
 {{outlet}}
+
+<p>
+  {{#if uselessBool}}
+    <span>This is useless!</span>
+  {{else}}
+    <span>This is not useless.</span>
+  {{/if}}
+  <button {{action 'changeBool'}} class="useless-button">Change uselessness.</button>
+</p>
